@@ -85,3 +85,8 @@ plot_pca(pca_df = reference, firstpc = "PC2", secondpc = "PC3")
 plot_pca(pca_df = reference, firstpc = "PC3", secondpc = "PC4")
 
 #PC1 vs PC2 vs PC3 (i.e. 3 dimensional plot).
+fig <- plot_ly(reference, x = ~PC1, y = ~PC2, z = ~PC3, color = ~reference$population, colors = c('#636EFA','#EF553B','#00CC96') ) %>%
+  
+  add_markers(size = 12)
+
+fig
