@@ -16,3 +16,9 @@ find . -type f -name '*.selfSM' -exec cat {} + > all.txt
 
 #append SAMPLE column(column 1)  and FREEMIX column (column 7) to Contamination.txt file
 awk '{print$1, $7}' all.txt >> Contamination.txt
+
+#find and replace the redundant "#SEQ_ID FREEMIX" with nothing
+sed 's/#SEQ_ID FREEMIX//g' Contamination.txt > Contamination_test.txt
+
+#remove the blank lines from Contamination_test.sh and output to Contamination.txt
+awk 'NF > 0' Contamination_test.txt > Contamination.txt
