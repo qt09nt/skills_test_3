@@ -131,13 +131,15 @@ plot_pca(pca_df = combined, firstpc = "PC2", secondpc = "PC3")
 plot_pca(pca_df = combined, firstpc = "PC3", secondpc = "PC4")
 
 #PC1 vs PC2 vs PC3 (i.e. 3 dimensional plot).
+#symbol 200 is filled circle, 22 = filled square
 fig <- plot_ly(combined, x = ~PC1, y = ~PC2, z = ~PC3, color = ~combined$population, 
-               mode = 'markers', symbol = ~type, symbols = c('200','219'), 
+               mode = 'markers', symbol = ~type, symbols = c('200','22'),    
                text = ~ row.names(combined),
                colors = c('#636EFA','#EF553B','#00CC96') ) %>%
   add_markers(size = 12)
 
 fig
+
 
 ######label the study individuals dataframe with population labels in the population column
 DT_wide["HGDP01310",5]<-"EAS"
