@@ -132,11 +132,36 @@ plot_pca(pca_df = combined, firstpc = "PC3", secondpc = "PC4")
 
 #PC1 vs PC2 vs PC3 (i.e. 3 dimensional plot).
 fig <- plot_ly(combined, x = ~PC1, y = ~PC2, z = ~PC3, color = ~combined$population, 
-               mode = 'markers', symbol = ~type, symbols = c('200','5'), colors = c('#636EFA','#EF553B','#00CC96') ) %>%
+               mode = 'markers', symbol = ~type, symbols = c('200','219'), 
+               text = ~ row.names(combined),
+               colors = c('#636EFA','#EF553B','#00CC96') ) %>%
   add_markers(size = 12)
 
 fig
 
+######label the study individuals dataframe with population labels in the population column
+DT_wide["HGDP01310",5]<-"EAS"
+DT_wide["HGDP00563",5]<- "AMR"
+DT_wide["HGDP00669",5] <-"EUR"
+DT_wide["HGDP00450",5] <-"AFR"
+DT_wide["HGDP01225",5] <-"EAS"
+DT_wide["HGDP00575",5] <-"EUR"
+DT_wide["HGDP00082",5] <-"SAS"
+DT_wide["HGDP00859",5] <-"AMR"
+DT_wide["HGDP00843",5]<- "AMR"
+DT_wide["HGDP00525",5]<- "EUR"
+
+DT_wide$SAMPLE <- row.names(DT_wide)
+
+Populations<-cbind(DT_wide$SAMPLE, DT_wide[,1:5])
+
+colnames(Populations)[1]<- "SAMPLE"
+colnames(Populations)[6]<- "POPULATION"
+
+rownames(Populations)<- NULL
+
+write.table(Populations, file = "Populations.txt", sep = "\t",
+            row.names = FALSE, col.names = TRUE)
 
 
 ########### plotly symbols
